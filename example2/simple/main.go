@@ -19,6 +19,12 @@ func main() {
 
 	bpf_map := collec.Maps["pkt_count"]
 
+	/*
+		BPF only supports attaching programs to v2 cgroups. 라고 한다. cgroupfs에서는 사용불가
+		cgroup v2 활성화하는 방법
+		https://sleeplessbeastie.eu/2021/09/10/how-to-enable-control-group-v2/
+	*/
+
 	// Get the first-mounted cgroupv2 path.
 	// 여기에 적절한 cgroup path를 입력한다.
 	// 아래의 예시는 docker가 자동으로 생성해주는 Path를 직접 하드코딩해 보았음.

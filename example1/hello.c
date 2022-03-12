@@ -12,6 +12,7 @@
 				##__VA_ARGS__);			\
 })
 
+// ringbuf로 바꾸면 성능이 더 좋아진다고 함
 struct {
 	__uint(type, BPF_MAP_TYPE_PERF_EVENT_ARRAY);
     // __uint(max_entries, 1);
@@ -87,6 +88,7 @@ int bpf_prog(struct execve_args *ctx) {
     }
 
     int ret = bpf_perf_event_output(ctx, &events_perf_event_array, BPF_F_CURRENT_CPU, &test_data, sizeof(struct event_t));
+    // bpf print 종류는 /sys/kernel/debug/tracing/trace_pipe 에 찍힌다.
     bpf_printk("test: %s\n", ctx->filename);
 	if (ret) {
         bpf_printk("perf_event_output failed: %d\n", ret);
