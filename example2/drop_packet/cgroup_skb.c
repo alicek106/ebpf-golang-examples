@@ -91,4 +91,6 @@ int count_egress_packets(struct __sk_buff *skb) {
     return handle_packet(skb);
 }
 
+// https://patchwork.ozlabs.org/project/netdev/patch/20180528004344.3606-4-daniel@iogearbox.net/
+// GPL 호환 안되면 커널 샌드박스에서 실행이 안된다
 char __license[] SEC("license") = "Dual MIT/GPL";
